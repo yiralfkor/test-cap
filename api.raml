@@ -1,0 +1,106 @@
+#%RAML 1.0
+title: Test training # required title
+version: 1
+baseUri: http://example.com/{version}/test-training/
+documentation:
+  - title: Welcome
+    content: |
+      Welcome to the Example Documentation. The Example API allows you
+      to do stuff. See also [example.com](https://www.example.com).
+  - title: Chapter two
+    content: |
+      More content here. Including **bold** text!
+
+/carros:
+  description: Gestiona las operacion con los autos.
+
+  get: 
+    responses: # declare a response
+      200: # HTTP status code
+        body: # declare content of response
+          application/json: # media type
+            type: | # structural definition of a response (schema or type)
+             {
+              "data": [
+                {
+                  "id": "12",
+                  "title": "Hello world Response",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "title": "Hello world Response",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "title": "Hello world Response",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "title": "Hello world Response",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              ]
+            }
+            example: # example how a response looks like
+              {
+                "message": "Hello world"
+              }
+  /{carro-id}:
+    description: |
+      Gestion las operaciones sobre los carros
+    displayName: TEST
+    get:
+      description: Obtiene los atributos o detalle del carro
+
+    put:
+        body:
+          application/x-www-form-urlencoded:
+            properties:
+              name:
+                description: name on account
+                type: string
+                examples:
+                  example1: Naruto Uzumaki
+                  example2: Kevin Renskers
+              gender:
+                enum: ["male", "female"]
+
+
+    /marcas:
+      description: obtiene las marcas
+      uriParameters:
+        id:
+          type: string
+          description: account identifier
+          minLength: 1
+          maxLength: 10
+
+      get:
+        headers:
+          Authorization:
+            type: string
+            description: Basic authentication header
+            example: |
+              Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
+      
